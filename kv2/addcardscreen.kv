@@ -1,0 +1,196 @@
+
+<AddCardScreen>:
+    canvas:
+        Color:
+            rgb:utils.get_color_from_hex("#f5f5f5")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+# The top arrow and label 
+ #############################################################################   
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'arrow-left'
+            on_release: app.change_screen('payment_screen')
+            
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Add Card'
+            id:updated_number
+
+        
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 0.9,1
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,5
+                
+                FloatLayout:                
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: "200dp"
+                    canvas.before:
+
+                        RoundedRectangle:
+
+                            source: 'images/card_no_texts.png'
+                            size: self.size
+                            pos: self.pos
+                        
+                        
+                    MDLabel:
+                        size_hint_y: None
+                        pos_hint: {"right": 0.9, "top": .45}
+                        size_hint:0.8,0.1
+                        id:updated_number
+                        markup: True
+                        #halign:'center'
+                        #text:
+                        font_size: 24
+
+            
+                    MDLabel:
+                        id:updated_name
+                        size_hint_y: None
+                        pos_hint: {"right": 0.5, "top": .25}
+                        size_hint:0.4,0.1
+                        markup: True
+                        #halign:'left'
+                        text:name.text
+                        #font_size: 24
+
+            
+                    MDLabel:
+                        id:updated_month
+                        size_hint_y: None
+                        pos_hint: {"right":0.82, "top": .25}
+                        size_hint:0.08,0.1
+                        markup: True
+                        #halign:'right'
+                        text:month.text
+                        #font_size: 24
+
+                        
+                    MDLabel:
+                        id:updated_year
+                        size_hint_y: None
+                        pos_hint: {"right":0.9, "top": .25}
+                        size_hint:0.08,0.1
+                        markup: True
+                        #halign:'right'
+                        text:year.text
+                        #font_size: 24
+
+                        
+
+                GridLayout:
+                    cols:1
+                    height: "200dp"
+                    spacing: 10,5
+                    size_hint_y: None
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        #size_hint_y: None
+                        padding: 10,10
+
+                        MDIcon:
+                            icon:"account-outline" 
+                            size_hint:0.2,1.1
+                            halign:'left'
+
+                        MDTextField:
+                            id:name
+                            #size_hint: 0.5,None
+                            hint_text: "Name on card"
+                            
+        
+                        
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        #size_hint_y: None
+                        padding: 10,10
+
+                        MDIcon:
+                            icon: 'credit-card-outline'
+                            size_hint:0.2,1.1
+                            halign:'left'
+
+                        MDTextField:
+                            #text: 'default'
+                            id:number
+                            hint_text: 'Card number'
+                            max_text_length: 16
+                            on_text:
+                                root.card_number_input()
+                                #AddCardScreen.testing(self)
+
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        #size_hint_y: None
+                        padding: 10,10
+                        spacing:10
+
+                        MDIcon:
+                            icon: 'calendar-outline'
+                            size_hint:0.2,1.1
+                            halign:'left'
+
+                        MDTextField:
+                            id:month
+                            #size_hint: 0.5,None
+                            hint_text: 'Expiry month'
+                            max_text_length: 2
+                            on_text:
+                                root.card_month_input()
+
+
+                        MDIcon:
+                            icon: 'slash-forward'
+                            size_hint:0.2,1.1
+                            halign:'left'
+                            
+
+                        MDTextField:
+                            id:year
+                            #size_hint: 0.5,None
+                            hint_text: 'Expiry year'
+                            max_text_length: 2
+
+
+                    
+                FloatLayout
+                    size_hint_y: None
+                    height: "80dp"
+
+                    MDFillRoundFlatIconButton:
+                        pos_hint: {"center_x":0.5, "center_y":0.5 }
+                        text: "          Submit card          "
+                        icon: "credit-card"
+                        on_release:
+                            print('Card Submitted to the database')
+
+
+
+

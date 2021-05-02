@@ -1,0 +1,156 @@
+<TicketScreen>:
+	
+	
+	FloatLayout:
+        
+        pos_hint: {'right': 1, 'top': 1 }
+        size_hint: 1 , .935
+
+        canvas:
+            Color:
+                rgb:utils.get_color_from_hex("#f5f5f5")
+            
+            Rectangle:
+               
+                size: self.size
+                pos: self.pos
+                
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5 , 'top': 0.1 }
+            size_hint: 1 , .085
+            
+            MDSeparator:
+
+
+		BoxLayout:
+			orientation: 'horizontal'
+			pos_hint: {"top": 1, "right": 1}
+			size_hint: 1, .10
+			padding:20
+
+			MDLabel:
+				text: " Bus company"
+				id: bus_company
+				font_size: 13	
+
+			MDLabel:
+				text: "Station Location"
+				id: station_location
+				font_size: 13
+		
+		GridLayout:
+			pos_hint: {"top": .9, "right": 1}
+			size_hint: 1, .10
+			cols: 2
+			padding:20
+			
+			MDLabel:
+				text: "Passenger"
+				font_size: 11
+
+			MDLabel:
+				text: "Bus"
+				font_size: 11
+
+			MDLabel:
+				text: "John Decola"
+				id:passenger_name
+			MDLabel:
+				text: "Bus Number and Class"
+				id: bus_number
+
+		GridLayout:
+			cols: 2
+			pos_hint: {"top": .73, "right": .9}
+			size_hint: .8, .2
+
+			BoxLayout:
+				orientation: 'vertical'
+
+				GridLayout:
+					paddind : 20,20
+					cols :1 
+					MDLabel:
+						text: "From"
+						font_size: 11.5
+					MDLabel:
+						text: "CITY A"
+						id:departure_city
+						font_size: 20
+				GridLayout:
+					paddind : 20,20
+					cols :1 
+					MDLabel: 
+						text:"Departure"
+						font_size: 11.5
+					MDLabel:		
+						text: "06:30 AM"
+						id:departure_time
+
+			BoxLayout:
+				orientation: 'vertical'
+
+				GridLayout:
+					paddind : 20,20
+					cols :1 
+
+					MDLabel:
+						text: "To"
+						font_size: 11.5
+					MDLabel:
+						text: "CITY B"
+						id: arrival_city
+						font_size: 20
+
+				GridLayout:
+					paddind : 20,20
+					cols:1
+					MDLabel:
+						text: "Arrival"
+						font_size: 11.5
+					MDLabel:
+						text: "12:30 PM"
+						id: arrival_time
+
+		GridLayout:
+			cols: 2
+			pos_hint: {"top": .5, "right": .9}
+			size_hint: .8, .3
+
+			BoxLayout:
+				orientation: 'vertical'
+
+				GridLayout:
+					cols: 1
+					padding: 20,20
+					MDLabel:
+						text : "Seat"
+						font_size: 11.5
+					MDLabel:
+						text : "27B"
+						id: seat_number
+
+
+				GridLayout:
+					cols: 1
+					padding: 20,20
+
+					MDLabel:
+						text : "Ticket number"
+						id: ticket number
+						font_size: 11.5
+					MDLabel:
+						text: "248393947437"	
+
+			BoxLayout:
+				orientation: 'vertical'
+				Image:
+					source: 'icons/QR-Code.png'
+	    			size: self.texture_size
+
+	    			
+
+
+		
+					

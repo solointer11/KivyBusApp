@@ -1,0 +1,124 @@
+
+
+<CardScreen>:
+    canvas:
+        Color:
+            rgb:utils.get_color_from_hex("#f5f5f5")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# The top arrow and label 
+ #############################################################################   
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'arrow-left'
+            on_release: app.change_screen('bus_selection_screen')
+            
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Card Payment'
+
+
+
+
+# Scrollable items start
+ #############################################################################
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 1, 1
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,50
+
+
+      
+		        ThemedInput:
+		            id: name_card
+		            size_hint: .9 ,.1
+		            pos_hint: {"center_x": .5, "top": .95}
+		            hint_text: "Name on card"
+		            bg_color: utils.get_color_from_hex("#ccebffff")
+		            highlight_color1:(0,0,0,1)
+		            highlight_color2: (0,0,0,1)
+
+		        ThemedInput:
+		            id: card_number
+		            size_hint: .9 ,.1
+		            pos_hint: {"center_x": .5, "top": .825}
+		            hint_text: "Card number"
+		            input_filter: 'int'
+		            max_text_length: 16
+		            bg_color: utils.get_color_from_hex("#ccebffff")
+		            highlight_color1:(0,0,0,1)
+		            highlight_color2: (0,0,0,1)
+		        
+
+		        ThemedInput:
+		            id: cvc_number
+		            size_hint: .9 ,.1
+		            pos_hint: {"center_x": .5, "top": .7}
+		            hint_text: "CVC"
+		            helper_text: "3 digit number on back of card"
+		            helper_text_mode : "on_focus"
+		            input_filter : "int"
+		            max_text_length: 3
+		            bg_color: utils.get_color_from_hex("#ccebffff")
+		            highlight_color1:(0,0,0,1)
+		            highlight_color2: (0,0,0,1)
+		        
+		        GridLayout:
+		            cols: 2
+		            size_hint: .9 ,.1
+		            pos_hint: {"center_x":.5, "top": .575}
+		            padding: 5,5
+
+		            ThemedInput:
+		                id: expiry_month
+		                hint_text : "Exp Month"
+		                input_filter : 'int'
+		                max_text_length : 2
+		                bg_color:utils.get_color_from_hex("#ccebffff")
+		                highlight_color1: (0,0,0,1)
+		                highlight_color2: (0,0,0,1)
+
+		            ThemedInput:
+		                id: expiry_year
+		                hint_text : "Exp Year"
+		                input_filter : 'int'
+		                max_text_length : 2
+		                bg_color:utils.get_color_from_hex("#ccebffff")
+		                highlight_color1: (0,0,0,1)
+		                highlight_color2: (0,0,0,1)
+
+		        ThemedButton:
+		            text: "Submit Card"
+		            size_hint: .4 ,.05
+		            pos_hint: {"center_x": .75, "top": .45}
+		            bg_color: utils.get_color_from_hex("#ccebffff")
+		            color: (0,0,0,1)
+		            on_release:
+		                # Need to refer to something
+		                app.submit_card()
+
+
+
+
+
+
+
+
+
+
+
+
+		  		

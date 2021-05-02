@@ -1,0 +1,210 @@
+<HomeScreen>:
+
+	FloatLayout:
+        pos_hint: {'right': 1, 'top': 1 }
+        size_hint: 1 , .92
+
+        canvas:
+            Color:
+                rgb:utils.get_color_from_hex("#f5f5f5")
+            
+            Rectangle:
+               
+                size: self.size
+                pos: self.pos
+                
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5 , 'top': 0.1 }
+            size_hint: 1 , .085
+            
+            MDSeparator:
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'right': 1.15, 'top': 1.2}
+            size_hint: 1 , 1.18
+            
+            canvas:
+                Color:
+    
+                Rectangle:
+                    source:'icons/Test14.png'
+                    size: self.size
+                    pos: self.pos
+        
+
+# A label with big font sizes at the top left
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'right': .7, 'top': .95}
+            size_hint: .68 , .18
+            
+
+            
+                    
+            MDLabel:
+                pos_hint: {'center_x': .5 }
+           
+                text: 'Book your ticket'
+                #font_size: 10
+                font_style : 'H3'
+                
+
+
+
+# A design for the homescreen UI: From label,To label, and search button
+      
+        BoxLayout:
+        	orientation: 'vertical'
+        	pos_hint: {'center_x': .5, 'top': .75}
+        	size_hint: .95 , .12
+            padding : 10,-1
+            #(0,0,0,1)
+            canvas.before:
+                #Color:
+                    #rgb:utils.get_color_from_hex("#1582e6")
+            
+                Rectangle:
+                    source:'icons/roundedbox.png'
+                    size: self.size
+                    pos: self.pos
+                
+
+            MDLabel:
+            	pos_hint: {'center_x': .5 }
+            	text: 'From'
+
+            MDTextField: 
+                hint_text: 'Departure City'
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'top': .60}
+            size_hint: .95 , .12
+            padding : 10,-1
+
+            canvas.before:
+                Color:
+                    #rgb:utils.get_color_from_hex("#1582e6")
+    
+                Rectangle:
+                    source:'icons/roundedbox.png'
+                    size: self.size
+                    pos: self.pos
+
+            MDLabel:
+            	pos_hint: {'center_x': .5 }
+            	text: 'To'
+            
+            MDTextField:
+                
+                hint_text: 'Arrival City'
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'right': .98, 'top': .45}
+            size_hint: .32 , .12
+            padding : 10,-1
+
+            canvas:
+                Color:
+                    #rgb:utils.get_color_from_hex("#1582e6")
+    
+                Rectangle:
+                    source:'icons/roundedbox.png'
+                    size: self.size
+                    pos: self.pos
+                
+
+            MDLabel:
+                pos_hint: {'center_x': .5 }
+                text: 'Return'
+
+            MDTextField:
+                size_hint: None, None
+                
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'right': .35, 'top': .45}
+            size_hint: .32 , .12
+            padding : 10,-1
+
+            canvas:
+                Color:
+                    #rgb:utils.get_color_from_hex("#1582e6")
+                Rectangle:
+                    source:'icons/roundedbox.png'
+                    size: self.size
+                    pos: self.pos
+                
+
+            MDLabel:
+                pos_hint: {'center_x': .5 }
+                text: 'Outbound'
+
+            MDTextField:
+                size_hint: None, None
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'top': .30}
+            size_hint: .95 , .12
+            padding : 10,-1
+
+            canvas:
+                Color:
+                    #rgb:utils.get_color_from_hex("#1582e6")
+                Rectangle:
+                    source:'icons/roundedbox.png'
+                    size: self.size
+                    pos: self.pos
+
+            MDLabel:
+                pos_hint: {'center_x': .5 }
+                text: 'Passenger'
+
+            BoxLayout:
+                oreintation: 'horizontal'
+
+                MDIcon:
+                    icon: 'account'
+                    #icon: 'account-supervisor' # Two peolpe
+                    #icon: 'account-child'      # Child
+                    #icon: 'account-group'      # More than 2 people
+
+                MDTextField:
+                    size_hint: None, None
+                    hint_text: '1 adult'
+
+
+
+
+	    BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5, 'top': .20 }
+            size_hint: 1 , .1
+
+            MDFillRoundFlatButton:
+
+                text: "         Search Busses         "
+                pos_hint: {'center_x': .5}
+                on_release: 
+                    app.change_screen('bus_selection_screen')
+                    app.search_responce()
+                    app.test_function()
+
+        
+
+       
+
+
+
+	
+

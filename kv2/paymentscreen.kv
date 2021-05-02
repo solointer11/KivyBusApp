@@ -1,0 +1,480 @@
+<ShortCardInput@FloatLayout>:
+    id:short_card_layout
+    size_hint_y: None
+    height: "90dp"            
+
+    canvas.before:
+        Color:
+            rgb:utils.get_color_from_hex("#ffffffff")
+        
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    MDLabel:
+        pos_hint: {"center_x":1.05, "top": 1.4}
+        text: "Card security code"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        markup :True
+
+    MDIcon:
+        icon: 'credit-card'
+        size_hint_y: None
+        pos_hint: {"right":1.05, "top": 1.1}
+
+    MDIcon:
+        icon: 'dots-horizontal'
+        size_hint_y: None
+        pos_hint: {"right":1.125, "top": 1.1}
+
+    MDLabel:
+        text: "1234"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        pos_hint: {"right":1.2, "top": 1.1}
+
+    MDTextButton:
+        text: "Change card"
+        pos_hint: {"center_x":0.17, "top": 0.4}
+        underline: True
+        custom_color: 0,0,0,1
+        on_release:
+            app.change_card() 
+            app.change_screen('change_card_screen')
+
+        
+    MyCustomTextField:
+        pos_hint: {"center_x":0.85, "top": 0.8}
+        size_hint: 0.10,0.45
+        mode:"rectangle"
+        hint_text: "CVV"
+        max_text_length: 3
+        input_filter: "int"
+
+
+
+
+
+<CardLayout@FloatLayout>:
+    size_hint_y: None
+    height: "200dp"
+    spacing: 10,10
+    width:"100dp"         
+
+    canvas.before:
+        Color:
+            rgb:utils.get_color_from_hex("#ffffffff")
+        
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+
+    MDLabel:
+        text: "Card Number"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        font_size:'14sp'
+        pos_hint: {"right":1.05, "top": 1.12}
+
+    TextInput:
+        pos_hint: {"right":1.4, "top": .95}
+        size_hint: 1,0.45
+        hint_text: "Input card number"
+        background_color:0,0,0,0
+
+    MDSeparator:
+        size_hint_y: None
+        pos_hint: {"center_x":0.5, "center_y": 0.75}
+
+    MDLabel:
+        pos_hint: {"right":1.05, "top": .87}
+        text: "Expiry Date"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        font_size:'14sp'
+        
+
+    TextInput:
+        pos_hint: {"right":1.4, "top": .7}
+        hint_text: "Input Card Month and Year"
+        size_hint: 1,0.45
+        background_color:0,0,0,0
+
+    MDSeparator:
+        size_hint_y: None
+        pos_hint: {"center_x":0.5, "center_y": 0.5}
+
+    MDLabel:
+        pos_hint: {"right":1.05, "top": .62}
+        text: "CVV"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        font_size:'14sp'
+        
+
+    TextInput:
+        pos_hint: {"right":1.4, "top": .45}
+        hint_text: "CVV"
+        size_hint: 1,0.45
+        background_color:0,0,0,0
+
+    MDSeparator:
+        size_hint_y: None
+        pos_hint: {"center_x":0.5, "center_y": 0.25}
+
+    MDLabel:
+        pos_hint: {"right":1.05, "top": 0.38}
+        text: "Name on Card"
+        font_style: "Subtitle1"
+        size_hint_y: None
+        font_size:'14sp'
+        
+
+    TextInput:
+        pos_hint: {"right":1.4, "top": 0.21}
+        hint_text: "Input name on card"
+        size_hint: 1,0.45
+        background_color:0,0,0,0
+
+
+<MyLabel@BoxLayout>:
+    
+    MDLabel:
+        text: "Just testing"
+        pos_hint:{"center_x":0.5,"top": 0.8}
+
+
+<InfoLabel@BoxLayout>:
+    orientation: 'horizontal'
+
+    text1: ''
+    text2: ''
+    padding: 18,30
+
+    MDLabel:
+        id:label
+        text:root.text1
+        #font_style: "Subtitle1"
+        font_size:'14sp'
+        #halign:'right'
+            
+    MDLabel:
+        id:label
+        text:root.text2
+        #font_style: "Subtitle1"
+        font_size:'14sp'
+        #halign:'left'
+
+
+<MoreInformation>:
+    padding: "25dp"
+    size_hint_y: None
+    height:dp(125)
+    size_hint:1,None
+    booking_fees:"TZS 1,000"
+    offer:"TZS 2,000"
+    ticket_cost:"TZS 10,000"
+
+    MDLabel:
+        size_hint: None, None
+        size: self.texture_size
+        markup: True
+        text_size: root.width - dp(35), None
+        text:
+            " Booking fees                           "+root.booking_fees+"\n" \
+            " Promotion and offers             "+root.offer+"\n" \
+            " Ticket costs                             "+root.ticket_cost+"\n\n" 
+
+          
+           
+
+
+<PaymentScreen>:
+    canvas:
+        Color:
+            rgb:utils.get_color_from_hex("#f5f5f5")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# The top arrow and label 
+ #############################################################################   
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'arrow-left'
+            on_release: app.change_screen('summary_screen')
+            
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Payment'
+
+        
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 0.9,1
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,5
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "270dp"
+                    spacing: 10,10            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                    
+                    MDIcon:
+                        icon: 'arrow-right-box'
+                        size_hint_y: None
+                        pos_hint: {"left":1, "top": 1.08}
+
+                    MDLabel:
+                        text: "[b]Total cost:[/b]"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.65, "top": 1.08}
+                        markup :True
+                    
+                    MDLabel:
+                        id:price_total
+                        text:""
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.96, "top": 1.08}
+                        bold :True
+
+                    MDSeparator:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "center_y": .8}
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.75}
+                        size_hint:0.95,0.8
+                        #spacing:10,50
+
+                        InfoLabel:
+                            id:dep_date
+                            text1:'OUT'
+                            text2: ''
+
+                        InfoLabel:
+                            id:dep_city
+                            text1:'From'
+                            text2: 'Dar es Salaam'
+
+                        InfoLabel:
+                            id:arr_city
+                            text1:'To'
+                            text2: 'Dodoma'
+
+                        InfoLabel:
+                            id:number_passenger
+                            text1:'Passenger'
+                            text2: '1 Adult'
+
+                        InfoLabel:
+                            id:passenger_email
+                            text1:'Email'
+                            text2: 'sample@email.com'
+
+                        InfoLabel:
+                            id:passenger_number
+                            text1:'Number'
+                            text2: '0765345678'
+
+                    
+                FloatLayout:
+                    size_hint_y: None
+                    height: "50" 
+
+                    MDLabel:
+                        pos_hint: {"right":1.01, "top": 1.35}
+                        text: "[b]To pay[/b]"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'17sp'
+                        markup: True
+
+                BoxLayout:
+                    id: expansion_panel_box
+                    size_hint_y: None
+                    height: self.minimum_height
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "50dp"
+                    id:test
+
+
+                    MDLabel:
+                        pos_hint:{"right": 1.01,"top":1.8}
+                        text: "[b]Total[/b]"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        markup: True
+
+                    MDLabel:
+                        id: price_total2       
+                        pos_hint:{"center_x": 1.16,"top":1.8}
+                        text: ""
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'17sp'
+                        markup: True
+                        bold :True
+
+                
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: 1,10
+
+
+                    GridLayout:
+                        id:options_method_layout
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding:50,10
+                        spacing: 1,10
+
+                        MDFillRoundFlatIconButton:
+                            id:card_button
+                            text: "          Pay by card          "
+                            icon: "credit-card"
+                            on_release:
+                                PaymentScreen.pay_by_card(self)
+                                #app.change_screen('card_screen')
+
+                        MDFillRoundFlatIconButton:
+                            id:mobile_button
+                            text: "Pay by mobile banking"
+                            icon: "cellphone-nfc"
+                            
+
+                        MDFillRoundFlatIconButton:
+                            id:paypal_button
+                            text: "          Pay by PayPal       "
+                            icon: "paypal"
+                            on_release:
+                                root.pay_by_paypal()
+                        
+#####################################################################################
+                    GridLayout:
+                        id:another_out_layout
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 1,10
+
+                        CardLayout:
+                            id:card_layout
+                            disabled:True
+                            opacity:0
+
+                        ShortCardInput:
+                            id:short_card_layout
+                            disabled:True
+                            opacity:0
+
+                
+                    GridLayout:
+                        id:out_method_layout
+                        cols: 1
+                        size_hint_y: None
+                        height: self.minimum_height
+                        padding:50,10
+                        spacing: 1,10
+
+
+                        MDFillRoundFlatIconButton:
+                            id:card_btn
+                            #pos_hint: {"center_x":0.5,"top": 0.4}
+                            text: "          Pay by Card       "
+                            icon: "cellphone-nfc"
+                            disabled:True
+                            opacity:0
+                            on_release: app.change_screen('ticket_screen')
+
+                        MDRectangleFlatButton:
+                            id:method_button
+                            text: "     Change Payment Method    "
+                            #icon: "paypal"
+                            pos_hint: {"center_x":0.5,"top": 0.6}
+                            #size_hint: 0.7,None
+                            disabled:True
+                            opacity:0
+                            text_color: 0, 0, 0, 1
+                            on_release: root.change_pay_method()
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100"
+
+                    MDLabel:
+                        pos_hint: {"center_x":0.7,"top": 1.15}
+                        markup: True
+                        font_size:'12sp'
+                        text: 
+                            "By booking your ticket you accept our\n"\
+                            "   [u]Travel App[/u] and [u]privacy policy[/u]\n\n"
+
+                            
+#Fixing some issue on the bottom of the screen
+
+        ScrollView:
+            pos_hint: {"Right": 1, "top": 0.092}
+            size_hint: 1, 1
+
+
+
+
+
+
+                    
+
+
+
+                    
+            
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+

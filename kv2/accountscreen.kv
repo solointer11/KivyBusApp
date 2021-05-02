@@ -1,0 +1,335 @@
+#:import Animation kivy.animation.Animation
+#:import MDExpansionPanel kivymd.uix.expansionpanel.MDExpansionPanel
+#:import MyClass summaryscreen.MyClass
+
+
+
+
+<Clickable@ButtonBehavior+BoxLayout>:
+    oreintation: 'horizontal'
+
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("#ffffffff") if self.state == 'normal' else utils.get_color_from_hex("#EDEDED")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+
+
+<AccountScreen>:
+
+# The top arrow and label
+
+#######################################################################
+    FloatLayout:
+        pos_hint: {'right': 1, 'top': 1 }
+        size_hint: 1 , .92
+
+        canvas:
+            Color:
+                rgb:utils.get_color_from_hex("#f5f5f5")
+            
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': .5 , 'top': 0.1 }
+            size_hint: 1 , .085
+            
+            MDSeparator:
+
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'information-outline'
+   
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Account'
+
+
+# Scrollable items start
+ #############################################################################
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 0.9, .9
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,50
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "120dp"
+
+                    canvas:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    MDLabel:
+                        pos_hint: {"center_x":0.55, "center_y": 0.9}
+                        size: self.texture_size
+                        markup: True
+                        bold: True
+                        font_style: "Subtitle1"
+                        font_size:'16sp'
+                        text:
+                            " User Not Signed In"
+                            
+                    MDLabel:
+                        pos_hint: {"center_x":0.55, "center_y": 0.45}
+                        markup: True
+                        font_style: "Subtitle1"
+                        font_size:'14sp'
+                        text:
+                            " To get full services click the sign in button below \n" \
+                            " to enjoy all offers and vouchers of the app \n\n" 
+
+                    MDFillRoundFlatIconButton:
+                        pos_hint: {"center_x":0.5, "center_y": 0.2}
+                        text: "               Sign in               "
+                        icon: "account"
+                        on_release:
+                            app.change_screen('fire_base_login_screen')
+
+                    # App the name or account info of the user 
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.8}
+                        size_hint:0.9,0.2
+
+    
+                        MyIconLabel:
+                            text:'Manage payment methods'
+                            icon: 'credit-card-multiple'
+                            halign: 'left'
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDSeparator:
+                        #size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.5}
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.35}
+                        size_hint:0.9,0.2
+
+
+                        MyIconLabel:
+                            text:'Log Out'
+                            icon: 'ticket'
+                            halign: 'left'
+                            
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+        
+
+                    MDLabel:
+                        text: "Offers informtion"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .25}
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.8}
+                        size_hint:0.9,0.2
+
+    
+                        MyIconLabel:
+                            text:'Promo'
+                            icon: 'gift'
+                            halign: 'left'
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDSeparator:
+                        #size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.5}
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.35}
+                        size_hint:0.9,0.2
+
+
+                        MyIconLabel:
+                            text:'Invite friend offer'
+                            icon: 'emoticon-excited'
+                            halign: 'left'
+                            
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDLabel:
+                        text: "Questions"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .25}
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.8}
+                        size_hint:0.9,0.2
+
+    
+                        MyIconLabel:
+                            text:'Contact us'
+                            icon: 'message-bulleted'
+                            halign: 'left'
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDSeparator:
+                        #size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.5}
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.35}
+                        size_hint:0.9,0.2
+
+
+                        MyIconLabel:
+                            text:'FAQs'
+                            icon: 'frequently-asked-questions' # information-variant
+                            halign: 'left'
+                            
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                
+
+                    MDLabel:
+                        text: "App Informations"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .25}
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.8}
+                        size_hint:0.9,0.2
+
+    
+                        MyIconLabel:
+                            text:'About TravelApp'
+                            icon: 'bus-multiple'
+                            halign: 'left'
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDSeparator:
+                        #size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.5}
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.35}
+                        size_hint:0.9,0.2
+
+
+                        MyIconLabel:
+                            text:'Settings'
+                            icon: 'settings'
+                            halign: 'left'
+                            
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+# Scrollable items end
+ #########################################################################     
+        

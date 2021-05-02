@@ -1,0 +1,626 @@
+#:import Animation kivy.animation.Animation
+#:import MDExpansionPanel kivymd.uix.expansionpanel.MDExpansionPanel
+#:import MyClass summaryscreen.MyClass
+#:import PaymentScreen paymentscreen.PaymentScreen
+
+
+
+<ClickableGrid@ButtonBehavior+BoxLayout>:
+    orientation: 'horizontal'
+
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("#ffffffff") if self.state == 'normal' else utils.get_color_from_hex("#EDEDED")
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+<MyIconLabel@BoxLayout>:
+    orientation: 'horizontal'
+    
+    icon:'check' #'check-circle' #'progress-check'
+    text: ''
+    halign:'right'
+    font_size:'14sp'
+
+    
+    MDIcon:
+        icon: root.icon
+        size_hint:0.2,1
+        halign:root.halign
+            
+    MDLabel:
+        id:label
+        text:root.text
+        font_style: "Subtitle1"
+        font_size:root.font_size
+
+
+<CustomIconButton@BoxLayout>
+    icon:'account'
+    callback: None
+
+    Widget:  
+
+    MDIconButton:
+        icon: root.icon
+        on_release: root.callback()
+        
+        
+
+<SummaryScreen>:
+    canvas:
+        Color:
+            rgb:utils.get_color_from_hex("#f5f5f5")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# The top arrow and label 
+ #############################################################################   
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'arrow-left'
+            on_release: app.change_screen('bus_selection_screen')
+            
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Summary'
+
+            
+
+# Scrollable items start
+ #############################################################################
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 0.9, .823
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,50
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "270dp"
+                                
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        pos_hint: {"left":1, "top": 1}
+                        size_hint: 1, 0.1
+
+                        MDIcon:
+                            icon: 'arrow-right-box'
+                            size_hint_y: None
+                            pos_hint: {"center_y":0.5 }
+                            size_hint: 0.45, None 
+
+                        MDLabel:
+                            text: "[b]Single Ticket[/b]"
+                            font_style: "Subtitle1"
+                            font_size:'14sp'
+                            size_hint_y: None
+                            pos_hint: {"center_y":0.5 }
+                            markup :True
+                        
+                        MDLabel:
+                            id:bus_name_label
+                            text: ""
+                            font_style: "Subtitle1"
+                            font_size:'14sp'
+                            size_hint_y: None
+                            pos_hint: {"center_y":0.5 }
+                            bold :True
+
+                        MDLabel:
+                            id: price_ticket
+                            text: ""
+                            font_style: "Subtitle1"
+                            size_hint_y: None
+                            pos_hint: {"center_y":0.5 }  
+                            markup: True
+
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        pos_hint: {"left":1, "top": .9}
+                        size_hint: 1, 0.1
+
+            
+                        Widget:
+                            size_hint_y: None
+                            pos_hint: {"center_y":0.5}
+                            size_hint: 0.15, None
+
+                        MDLabel:
+                            text: "Selected outbound day bus"
+                            font_style: "Subtitle1"
+                            size_hint_y: None
+                            font_size:'14sp'
+                            pos_hint: {"center_y":0.5}
+
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"left":0.95, "top": 0.75}
+                        size_hint:1,0.1
+    
+                        MyIconLabel:
+                            text:'First class & more tickets from Tsh 15,000'
+                            icon: 'blank'
+                            pos_hint: {"center_y":0.5}
+                            font_size:'11sp'
+                            halign: 'left'
+                            size_hint:1.5,None
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            pos_hint: {"center_y":0.5}
+                            size_hint:0.25,None
+
+                               
+
+                    MDSeparator:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": .58}
+
+                    MDIcon:
+                        icon: 'arrow-right-bold-box-outline'
+                        size_hint_y: None
+                        pos_hint: {"right":1.05, "center_y":.45}
+
+                    MDLabel:
+                        id:date_departure 
+                        text: "Sat, 15 Feb 2020"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "center_y":.45}
+                        
+                    MDLabel:
+                        id: from_time
+                        text: "[b]07:45[/b]"
+                        font_style: "Subtitle1"
+                        size_hint_y: None  
+                        pos_hint: {"center_x":0.65, "center_y": .35}
+                        markup: True
+                        bold: True
+
+                    MDIcon:
+                        icon: 'arrow-right'
+                        size_hint_y: None
+                        pos_hint: {"right":1.35, "center_y": .35}
+
+                    MDLabel:
+                        id: to_time
+                        text: "[b]17:45[/b]"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        pos_hint: {"right":1.5, "center_y": .35}
+                        markup: True
+                        bold: True
+
+                    MDLabel:
+                        id: from_city
+                        text: "Dar-es-salaam"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "center_y": .25}
+                          
+
+                    MDLabel:
+                        id: to_city
+                        text: "Dodoma"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.5, "center_y": .25}
+                         
+    
+                    MDLabel:
+                        text: "Dur: 2 h"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "center_y": .15}
+
+                    MDLabel:
+                        id: dest_road
+                        text: "Via Morogoro Rd"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.6, "center_y": .15}
+
+                    MDLabel:
+                        text: "Seat Preferences"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"top":0.1}
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    MDIcon:
+                        icon: 'account'
+                        size_hint_y: None
+                        pos_hint: {"right":1.05, "top": 1.2}
+                        
+                    MDLabel:
+                        text: "1 Adult"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "top": 1.2}
+
+                    MDSeparator:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "center_y": 0.5}
+
+                    ClickableGrid:
+                        pos_hint: {"right":1.15, "top": .38}
+                        height: "25dp"
+                        size_hint: 1,1
+                        size_hint_y: None
+
+                    MDLabel:
+                        text: "Select seat"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "top": .75}
+    
+                    MDIcon:
+                        icon: 'chevron-right'
+                        size_hint_y: None
+                        pos_hint: {"right":1.9, "top": .75} 
+                            
+
+
+
+                    MDLabel:
+                        text: "Passenger informtion"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .25}
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    MDLabel:
+                        text: "Name"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.05, "top": 1.2}
+
+                    TextInput:
+                        pos_hint: {"right":1.18, "top": 0.84}
+                        size_hint: 1,0.45
+                        hint_text: "Input name"
+                        background_color:0,0,0,0
+
+                    MDSeparator:
+                        size_hint_y: None
+                        pos_hint: {"5center_x":0., "center_y": 0.5} 
+
+                    MDLabel:
+                        text: "Email"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.05, "top": .75}
+
+                    TextInput:
+                        pos_hint: {"right":1.18, "top": .39}
+                        hint_text: "Input email"
+                        size_hint: 1,0.45
+                        background_color:0,0,0,0
+                        
+
+
+
+                    MDLabel:
+                        text: "Collecting your ticket"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .25}
+
+
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "400dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+                    
+                    
+                    GridLayout:
+                        cols: 1 
+                        size_hint_y: None
+                        pos_hint: {"center_x":.5, "top": 0.97}
+                        size_hint:0.95,0.45
+
+
+                        canvas.before:
+                        
+                            RoundedRectangle:
+                                source: 'images/Hands-QR-Code.jpg'
+                                size: self.size
+                                pos: self.pos
+                        BoxLayout: 
+                            size_hint_y: None
+                            pos_hint: {"left":.5, "top": 1}
+                            size_hint:0.85,0.3
+                            padding:10,-12
+                            #spacing: 0,1.5
+
+        
+                            MDIcon:
+                                icon:'check-circle'
+                                size_hint:0.1,1
+
+                            MDLabel:
+                                text: "[b]In-app etiecket or print ticket[/b]"
+                                markup: True
+                                halign:'center'
+
+                            MDIconButton:
+                                size_hint_y: None
+                                icon: 'information-outline'
+
+                        GridLayout:
+                            cols: 1
+                            #pos_hint: {"center_x":.6, "top": None}
+                            #size_hint:0.3,0.4
+                            padding:10,1
+
+
+                            MyIconLabel:
+                                text:'No hassle at station'
+                           
+                            MyIconLabel:
+                                text:'More payement options'
+                            
+                            MyIconLabel:
+                                text:'Availabe instantly'
+                        Widget:  
+                    
+
+
+
+                    BoxLayout: 
+                        size_hint_y: None
+                        pos_hint: {"center_x":.5, "top": 0.5}
+                        size_hint:0.85,0.1
+                        padding: 10,-5
+
+                        MDLabel:
+                            text: "[b]In-app etiecket or print ticket[/b]"
+                            pos_hint: {"left":.9, "top": 1}
+                            markup: True
+
+                        MDIconButton:
+                            size_hint_y: None
+                            icon: 'information-outline'
+
+                    GridLayout:
+                        cols: 1
+            
+                        pos_hint: {"center_x":.5, "top": 0.43}
+                        size_hint:0.7,.2
+                
+
+                        MyIconLabel:
+                            text:'No hassle at station'
+                       
+                        MyIconLabel:
+                            text:'More payement options'
+                        
+                        MyIconLabel:
+                            text:'Availabe instantly'    
+                            
+                        
+
+                   
+
+                    MDSeparator:
+                        size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.20}
+                        
+
+                    MDIcon:
+                        icon: 'record-circle'
+                        size_hint_y: None
+                        pos_hint: {"right":1.05, "top": .25}
+
+
+                    MDLabel:
+                        text: "Collect from station"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"center_x":0.65, "top": .25}
+
+
+                    MDIconButton:
+                        size_hint_y: None
+                        pos_hint: {'right': .65, 'top': .18}
+                        icon: 'information-outline'
+
+
+
+
+                    MDLabel:
+                        text: "Offers and Promotions"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        font_size:'14sp'
+                        pos_hint: {"right":1.01, "top": .075}
+
+
+
+
+                FloatLayout:
+                    size_hint_y: None
+                    height: "100dp"            
+
+                    canvas.before:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        RoundedRectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.8}
+                        size_hint:0.9,0.2
+
+    
+                        MyIconLabel:
+                            text:'Invite friend offer'
+                            icon: 'ticket-account'
+                            halign: 'left'
+                            
+
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+                    MDSeparator:
+                        #size_hint_y: None
+                        pos_hint: {'center_x': .5, 'center_y': 0.5}
+
+                    ClickableGrid:
+                        size_hint_y: None
+                        pos_hint: {"center_x":0.5, "top": 0.35}
+                        size_hint:0.9,0.2
+
+
+                        MyIconLabel:
+                            text:'Voucher offer'
+                            icon: 'ticket'
+                            halign: 'left'
+                            
+                        MDIcon:
+                            icon: 'chevron-right'
+                            halign:'right'
+                            size_hint:0.5,0.5
+
+# Scrollable items end
+ #############################################################################
+        ScrollView:
+            pos_hint: {"Right": 1, "top": 0.092}
+            size_hint: 1, 1
+
+        BoxLayout:
+            orientation: 'horizontal'
+            pos_hint: {"left": 1, "top": 0.092}
+            size_hint: 1, 0.1
+            padding: 20,10
+            
+            canvas:
+                Color:
+                    rgb:utils.get_color_from_hex("#ffffffff")
+                
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+           
+            BoxLayout:
+                MDLabel:
+                    text: 'Price:'
+                    font_style: "Subtitle1"
+                    halign:'left'
+                    size_hint:0.6 ,1            
+
+                MDLabel:
+                    id: total_price_ticket
+                    text: '[b]10,000 Tsh[/b]'
+                    #font_size : 14
+                    halign:'left'
+                    font_style: "Subtitle1"
+                    markup: True
+                    bold: True
+
+
+
+                CustomIconButton:
+                    callback: lambda: root.show_example_bottom_sheet()
+                    icon:'chevron-down'
+                    size_hint:0.5 ,1
+                    halign:'right'
+
+
+
+                MDFillRoundFlatButton:
+                    size_hint: 1.3,0.9
+                    text: "Continue"
+                    on_release: 
+                        app.change_screen('payment_screen')
+                        PaymentScreen.update_value(self)
+
+
+
+# Create a custom button for open list bottom sheet for more info to 
+# slide up when clicked.
+
+# The price with extra details 
+ #############################################################################
+
+                   
+

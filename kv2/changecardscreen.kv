@@ -1,0 +1,135 @@
+
+<MyClickable@ButtonBehavior+FloatLayout>:
+    height:'40dp'
+    size_hint_y: None
+    
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("#ffffffff") if self.state == 'normal' else utils.get_color_from_hex("#EDEDED")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+   	 
+	MyIconLabel:
+        pos_hint: {"center_x":0.40, "center_y": 0.5}
+        size_hint:0.7,0.2
+	    text:'Add a new card'
+	    icon: 'credit-card-plus-outline'
+	    halign: 'left'
+            
+    MDIcon:
+        pos_hint: {"center_x":0.5, "center_y": 0.5}
+        size_hint:0.9,0.2
+        icon: 'chevron-right'
+        halign:'right'
+
+<CardInfoLabel@FloatLayout>:
+    height:'80dp'
+    size_hint_y: None
+    
+    MDIcon:
+        pos_hint: {"center_x":0.3, "center_y": 0.5}
+        size_hint:0.5,0.2
+        icon: 'credit-card-outline'
+        halign: 'left'
+            
+    MDLabel:
+        pos_hint: {"center_x":0.65, "center_y": 0.7}
+        text: 'Micheal Jackson'
+
+    MDIcon:
+        icon: 'dots-horizontal'
+        size_hint_y: None
+        pos_hint: {"center_x":0.65, "center_y": 0.4}
+
+    MDLabel:
+        pos_hint: {"center_x":0.73, "center_y": 0.4}
+        text: '4366'
+
+    MDLabel:
+        pos_hint: {"center_x":0.88, "center_y": 0.4}
+        text: 'Expiry 08/20'
+       
+
+    MDSeparator:
+        pos_hint: {'center_x': .5, 'top': 0.1}
+
+
+
+
+
+<ChangeCardScreen>:
+    canvas:
+        Color:
+            rgb:utils.get_color_from_hex("#f5f5f5")
+        
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+# The top arrow and label 
+ #############################################################################   
+    FloatLayout:
+        
+        MDIconButton:
+            pos_hint: {'center_x': .1, 'top': 0.99 }
+            
+            icon: 'arrow-left'
+            on_release: app.change_screen('payment_screen')
+            
+
+        MDLabel: 
+            pos_hint: {'center_x': .85, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Change Card'
+
+        MDTextButton: 
+            pos_hint: {'center_x': .88, 'top': 1 }
+            size_hint: 1, 0.1
+            text: 'Edit'
+
+# Scrollable items start
+ #############################################################################
+        ScrollView:
+            pos_hint: {"center_x": .5, "top": 0.92}
+            size_hint: 0.9, .9
+            
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10,50
+
+
+                BoxLayout:
+	                orientation: 'vertical'
+	                height: self.minimum_height
+                    size_hint_y: None
+                    spacing: 10,10
+                    canvas:
+                        Color:
+                            rgb:utils.get_color_from_hex("#ffffffff")
+                        
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        height: self.minimum_height
+                        size_hint_y: None
+                        spacing: 10,10
+                        id:card_info
+  
+                   
+                    MyClickable:
+                        on_release:app.change_screen('add_card_screen')
+                   
+                    
+                  
+                   
+
+
+	                         
+                    
