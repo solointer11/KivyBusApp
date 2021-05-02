@@ -1,0 +1,113 @@
+#:import utils kivy.utils 
+#: include kv2/homescreen.kv
+#: include kv2/busselectionscreen.kv
+#: include kv2/selectticketscreen.kv
+#: include kv2/ticketscreen.kv
+#: include kv2/cardscreen.kv
+#: include kv2/accountscreen.kv
+#: include kv2/paymentscreen.kv
+#: include kv2/summaryscreen.kv
+#: include kv2/changecardscreen.kv
+#: include kv2/addcardscreen.kv
+#:include FirebaseLoginScreen/firebaseloginscreen.kv
+#:import FirebaseLoginScreen FirebaseLoginScreen.firebaseloginscreen 
+
+
+FloatLayout:
+    
+    GridLayout:
+        cols:1
+        
+        MDBottomNavigation:
+            id: panel
+
+            MDBottomNavigationItem:
+                name : 'search'
+                text : 'Search'
+                icon : 'shield-search'
+                on_tab_release: 
+                    app.change_screen('home_screen')
+
+
+            MDBottomNavigationItem:
+                name : 'tickets'
+                text : 'Tickets'
+                icon : 'ticket-account'
+                on_tab_release: 
+                    app.change_screen('ticket_screen') 
+                   
+            MDBottomNavigationItem:
+                name : 'account'
+                text : 'Account'
+                icon : 'account-box'
+                on_tab_release: 
+                    app.change_screen('account_screen')
+
+    ScreenManager:
+        # Manages the arrangement of screens after app is opened
+        # Pos and size hint takes the top part of all screens to be made
+        id: screen_manager
+
+        HomeScreen:
+            name: "home_screen"
+            id: home_screen
+
+        FirebaseLoginScreen:
+            name: "fire_base_login_screen"
+            id: fire_base_login_screen
+            size_hint: 1,1
+            pos_hint: {"top": 1, "right": 1}
+            web_api_key: "AIzaSyBT7sEo7tWB_rYnYkbrgSePgLfEHiK_otY"
+            primary_color: utils.get_color_from_hex("#7f9fffff")
+            secondary_color: utils.get_color_from_hex("#e5ffffff")
+            tertiary_color: utils.get_color_from_hex("#e5ffffff")
+
+            on_login_success:
+                #print("USER LOGGED IN")
+                #app.user_localId = self.localId
+                #app.user_idToken = self.idToken
+                #print(self.localId)
+                #print(fire_base_login_screen.refresh_token_file)
+
+        SelectTicketScreen:
+            name: "select_ticket_screen"
+            id: select_ticket_screen
+    
+        TicketScreen:
+            name: "ticket_screen"
+            id: ticket_screen
+
+        BusSelectionScreen:
+            name: "bus_selection_screen"
+            id: bus_selection_screen
+
+        CardScreen:
+            name: "card_screen"
+            id: card_screen
+
+        AccountScreen:
+            name: "account_screen"
+            id: account_screen
+
+        PaymentScreen:
+            name: "payment_screen"
+            id: payment_screen
+
+        SummaryScreen:
+            name: "summary_screen"
+            id: summary_screen
+            
+        ChangeCardScreen:
+            name: "change_card_screen"
+            id: change_card_screen
+
+        AddCardScreen:
+            name: "add_card_screen"
+            id: add_card_screen
+
+        
+
+            
+    
+
+
